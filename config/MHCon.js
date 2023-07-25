@@ -1,9 +1,18 @@
+
 /*****************************************************
-Start of Module
+* Start of Module
+* module: MHCon.js
+Description:
+Classification:
+GitHub: https://github.com/RiceMTB/Malcom/edit/main/config/MHCon.js
+Optional: Upto author but will come up wth some stds
 *****************************************************/
 
 /*****************************************************
-Imports
+Require ABC order
+Base 
+PAckeages
+user dev
 *****************************************************/
 const sql = require("mssql/msnodesqlv8");
 const sqlConfig = require('./dbconfig')["development"];
@@ -13,26 +22,31 @@ Local Constants
 *****************************************************/
 
 /*****************************************************
-Code Start
+Start of Code
 *****************************************************/
 
 /***********************
-Async Function: allJoke
-Created/By: 23 July 23 Rice
+Function: 
 Description: Returns Jokes & Punchline as Recordset
+(optinal) Type:
+Parameters:
+
+date    Auth    Comment
+YYYYMMMDD
 ************************/
 
 async function allJoke() {
   try {
-      let pool = await sql.connect(sqlConfig)
-      let jokes = await pool.request()
-          .query(dbSQLStatements.Select_Statements.ALLJOKE)
-      return jokes.recordsets
-  } catch (err) {
+      const pool = await sql.connect(sqlConfig); //const vs let research
+      const jokes = await pool.request()
+          .query(dbSQLStatements.Select_Statements.ALLJOKE); // yes on semi
+      return jokes.recordsets; //pick a linter....
+  }  //try
+  catch (err) {
     console.error(err)
       // ... error checks https://codedamn.com/news/javascript/javascript-async-await-error
-  }
-}
+  } //catch(err)
+};   //End of Function allJoke()
 
 /***********************
 Async Function: randomJoke
@@ -40,7 +54,7 @@ Created/By: 23 July 23 Rice
 Description: Returns Random Jokes & Punchline as Recordset
 ************************/
 
-async function randomJoke() {
+exports.randomJoke = async function () {
     try {
         let pool = await sql.connect(sqlConfig)
         let jokes = await pool.request()
@@ -53,18 +67,16 @@ async function randomJoke() {
   }
 
 /*****************************************************
-Code end
-*****************************************************/
-
-
-/*****************************************************
 Exports
 *****************************************************/
 
 module.exports = {
     getAllJokes: allJoke,
-    randomJoke: randomJoke
-  }
+    randomJoke: randomJoke,
+  } //module.exports
+/*****************************************************
+End of Code
+*****************************************************/
 
 /*****************************************************
 End of Module
