@@ -17,7 +17,7 @@ Code Start
 *****************************************************/
 
 /***********************
-Async Function: allJoke
+Function: allJoke
 Created/By: 23 July 23 Rice
 Description: Returns Jokes & Punchline as Recordset
 ************************/
