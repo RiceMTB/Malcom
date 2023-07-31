@@ -1,12 +1,12 @@
 //https://www.telerik.com/blogs/step-by-step-create-node-js-rest-api-sql-server-database
 
-var  Db = require('./config/MHCon');
-var  Order = require('./class/cm_joke');
-var  express = require('express');
-var  bodyParser = require('body-parser');
-var  cors = require('cors');
-var  app = express();
-var  router = express.Router();
+const  Db = require('./config/dbops');
+const   Order = require('./class/cm_joke');
+const   express = require('express');
+const bodyParser = require('body-parser');
+const  cors = require('cors');
+const  app = express();
+const  router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended:  true }));
 app.use(bodyParser.json());
@@ -20,11 +20,10 @@ console.log('Joke API is runnning at ' + port);
 router.use((request, response, next) => {
     console.log('Middleware received a request');
     next();
-  });
+  })
 
 router.route('/').get((request, response) => {
-    
-      response.json({please:"work"});
+    response.json({please:"work"});
     })
 
 router.route('/alljokes').get((request, response) => {
@@ -38,3 +37,9 @@ router.route('/randomjoke').get((request, response) => {
       response.json(data[0]);
     })
   })
+
+// router.route('/newjoke').post((request, response)=>{ 
+//     let newJoke = request.body;
+//     response.send('New Joke Received: ' + JSON.stringify(newJoke));
+//   })
+
