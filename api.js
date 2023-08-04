@@ -1,7 +1,7 @@
 //https://www.telerik.com/blogs/step-by-step-create-node-js-rest-api-sql-server-database
 
 const  Db = require('./config/dbops');
-const   Order = require('./class/cm_joke');
+//const   Order = require('./class/cm_joke');
 const   express = require('express');
 const bodyParser = require('body-parser');
 const  cors = require('cors');
