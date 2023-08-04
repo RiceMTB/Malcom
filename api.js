@@ -33,6 +33,7 @@ router.route('/alljokes').get((request, response) => {
   })
 
 router.route('/randomjoke').get((request, response) => {
+    console.log("Request for Random Joke")
     Db.randomJoke().then((data) => {
       response.json(data[0]);
     })
