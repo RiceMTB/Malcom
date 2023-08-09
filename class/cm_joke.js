@@ -6,7 +6,6 @@ class joke{
         this.my_JokeStr = "";
         this.my_PunchlineStr = "";
         this.my_PunchlineID = 0;
-
     }
 }
 

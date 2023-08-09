@@ -7,15 +7,15 @@ const bodyParser = require('body-parser');
 const  cors = require('cors');
 const  app = express();
 const  router = express.Router();
-
-app.use(bodyParser.urlencoded({ extended:  true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended:  true }));
+
 app.use(cors());
 app.use('/api', router);
 
 var  port = process.env.PORT || 8090;
 app.listen(port);
-console.log('Joke API is runnning at ' + port);
+console.log('*'.repeat(20) + " " +'Joke API is runnning at ' + port + ' ' + '*'.repeat(20));
 
 router.use((request, response, next) => {
     console.log('Middleware received a request');
@@ -39,8 +39,25 @@ router.route('/randomjoke').get((request, response) => {
     })
   })
 
-// router.route('/newjoke').post((request, response)=>{ 
-//     let newJoke = request.body;
-//     response.send('New Joke Received: ' + JSON.stringify(newJoke));
-//   })
+router.route('/').post((request, response)=>{ 
+    console.log("Post Request")
+    let newJoke = request.body;
+    response.send('New Joke Received: ' + JSON.stringify(newJoke));
+    Db.insertJoke(newJoke)
+  })
 
+  router.route('/jokebyid/:myID').get((request, response)=>{ 
+    console.log("Get Request For Joke By ID");
+    console.log('Getting: ' + request.params.myID);
+    Db.jokebyID(request.params.myID).then((data)=> {
+      response.json(data[0])
+    });
+  })
+
+  router.route('/jokedelete/:myID').delete((request, response)=>{ 
+    console.log("Get Request to delete Joke By ID");
+    console.log('Will Delete Joke_ID: ' + request.params.myID);
+    Db.deleteJokeByID(request.params.myID).then((data)=> {
+       response.json(data)
+     });
+  })
