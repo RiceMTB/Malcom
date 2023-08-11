@@ -123,6 +123,28 @@ async function deleteJokeByID(JokeIDin) {
     }
 }
 
+/***********************
+Async Function: insertLogLineToDB
+Created/By: 11 Aug 23 Rice
+Description: Inserts a log line to DB
+************************/
+
+async function insertLogLineToDB(lineIn) {
+    try {
+        let pool = await sql.connect(sqlConfig)
+        let jokes = await pool.request()
+            .input('logline', sql.VarChar(2000), lineIn)
+            .execute(dbSQLStatements.SPI_Names.SPI_LOG_LINE)
+        return {
+                "STATUS": "SUCCSESS"
+                }
+    } 
+    catch (err) {
+        console.error(err)
+        // ... error checks https://codedamn.com/news/javascript/javascript-async-await-error
+      }
+  }
+
 /*****************************************************
 Code end
 *****************************************************/
@@ -137,7 +159,8 @@ module.exports = {
     randomJoke: randomJoke,
     insertJoke: insertJoke, 
     jokebyID: jokeByID,
-    deleteJokeByID: deleteJokeByID
+    deleteJokeByID: deleteJokeByID,
+    jokelog: insertLogLineToDB
   }
 
 /*****************************************************

@@ -4,7 +4,8 @@ const Select_Statements = {
 }
 
 const SPI_Names = { 
-    SPI_JOKE_PUNCHLINE: 'SPI_JOKE_PUNCHLINE'
+    SPI_JOKE_PUNCHLINE: 'SPI_JOKE_PUNCHLINE',
+    SPI_LOG_LINE: 'SPI_MALCOM_LOG'
 }
 
 const SP_Names = {
