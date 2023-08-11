@@ -1,12 +1,12 @@
 //https://www.telerik.com/blogs/step-by-step-create-node-js-rest-api-sql-server-database
 
-const  Db = require('./config/dbops');
-//const   Order = require('./class/cm_joke');
-const   express = require('express');
+const Db = require('./config/dbops');
+const ExData = require("./externalAPI/ExternalDataApi.js") 
+const express = require('express');
 const bodyParser = require('body-parser');
-const  cors = require('cors');
-const  app = express();
-const  router = express.Router();
+const cors = require('cors');
+const app = express();
+const router = express.Router();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:  true }));
 
@@ -55,9 +55,17 @@ router.route('/').post((request, response)=>{
   })
 
   router.route('/jokedelete/:myID').delete((request, response)=>{ 
-    console.log("Get Request to delete Joke By ID");
+    console.log("Delete Request to delete Joke By ID");
     console.log('Will Delete Joke_ID: ' + request.params.myID);
     Db.deleteJokeByID(request.params.myID).then((data)=> {
        response.json(data)
      });
+  })
+
+  router.route('/bitcoin/').get((request, response)=>{ 
+    console.log("Request for Bitcoin Price");
+    ExData.bitconPrice().then((data) => {
+      outData = ExData.bitconOutData(data)
+      response.json(outData);
+    });
   })
